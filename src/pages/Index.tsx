@@ -4,8 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import Icon from "@/components/ui/icon";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Index = () => {
+  const heroAnimation = useScrollAnimation(0.1);
+  const featuresAnimation = useScrollAnimation(0.1);
+  const servicesAnimation = useScrollAnimation(0.1);
+  const statsAnimation = useScrollAnimation(0.1);
+  const contactsAnimation = useScrollAnimation(0.1);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -31,7 +38,12 @@ const Index = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="container mx-auto px-4 text-center relative z-10">
+        <div 
+          ref={heroAnimation.ref}
+          className={`container mx-auto px-4 text-center relative z-10 transition-all duration-1000 ${
+            heroAnimation.isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <h1 className="text-5xl font-bold text-secondary mb-6">
             WSE.AM
           </h1>
@@ -42,7 +54,7 @@ const Index = () => {
             Наша миссия — помогать тем, кто уже живёт в Ереване или только собирается переехать, 
             находить идеальное жильё для жизни и отдыха.
           </p>
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
+          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 hover:scale-105 transition-transform">
             Оставить заявку
           </Button>
         </div>
@@ -50,26 +62,31 @@ const Index = () => {
 
       {/* Features */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <div 
+          ref={featuresAnimation.ref}
+          className={`container mx-auto px-4 transition-all duration-1000 ${
+            featuresAnimation.isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center transform hover:scale-105 transition-transform duration-300">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 transition-colors">
                 <Icon name="Users" size={32} className="text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-secondary mb-2">Опытные агенты</h3>
               <p className="text-muted-foreground">Опытные и внимательные агенты</p>
             </div>
             
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center transform hover:scale-105 transition-transform duration-300">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 transition-colors">
                 <Icon name="Home" size={32} className="text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-secondary mb-2">Проверенная база</h3>
               <p className="text-muted-foreground">Проверенная база квартир и надёжных собственников</p>
             </div>
             
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="text-center transform hover:scale-105 transition-transform duration-300">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 transition-colors">
                 <Icon name="FileText" size={32} className="text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-secondary mb-2">Полное сопровождение</h3>
@@ -81,12 +98,17 @@ const Index = () => {
 
       {/* Services */}
       <section id="services" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+        <div 
+          ref={servicesAnimation.ref}
+          className={`container mx-auto px-4 transition-all duration-1000 ${
+            servicesAnimation.isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <h2 className="text-3xl font-bold text-center text-secondary mb-12">Наши услуги</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="hover:shadow-lg transition-shadow">
+            <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 transition-colors">
                   <Icon name="Key" size={32} className="text-primary" />
                 </div>
                 <CardTitle className="text-secondary">Аренда жилья</CardTitle>
@@ -98,9 +120,9 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow">
+            <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 transition-colors">
                   <Icon name="Building" size={32} className="text-primary" />
                 </div>
                 <CardTitle className="text-secondary">Купля-продажа</CardTitle>
@@ -112,9 +134,9 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow">
+            <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 transition-colors">
                   <Icon name="Shield" size={32} className="text-primary" />
                 </div>
                 <CardTitle className="text-secondary">Поддержка сделок</CardTitle>
@@ -131,19 +153,24 @@ const Index = () => {
 
       {/* Stats */}
       <section className="py-16 bg-secondary text-white">
-        <div className="container mx-auto px-4 text-center">
+        <div 
+          ref={statsAnimation.ref}
+          className={`container mx-auto px-4 text-center transition-all duration-1000 ${
+            statsAnimation.isVisible ? 'animate-scale-in' : 'opacity-0 scale-95'
+          }`}
+        >
           <h2 className="text-3xl font-bold mb-12">Наши достижения</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">1000+</div>
+            <div className="hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl font-bold text-primary mb-2 animate-pulse">1000+</div>
               <p className="text-xl">Довольных клиентов</p>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">2023</div>
+            <div className="hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl font-bold text-primary mb-2 animate-pulse">2023</div>
               <p className="text-xl">Год основания</p>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">100%</div>
+            <div className="hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl font-bold text-primary mb-2 animate-pulse">100%</div>
               <p className="text-xl">Проверенные объекты</p>
             </div>
           </div>
@@ -152,7 +179,12 @@ const Index = () => {
 
       {/* Contact Form */}
       <section id="contacts" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+        <div 
+          ref={contactsAnimation.ref}
+          className={`container mx-auto px-4 transition-all duration-1000 ${
+            contactsAnimation.isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold text-secondary mb-6">Оставить заявку</h2>
@@ -173,7 +205,7 @@ const Index = () => {
                   <Label htmlFor="message">Сообщение</Label>
                   <Textarea id="message" placeholder="Расскажите о ваших потребностях..." rows={4} />
                 </div>
-                <Button className="w-full bg-primary hover:bg-primary/90">
+                <Button className="w-full bg-primary hover:bg-primary/90 hover:scale-105 transition-transform">
                   Отправить заявку
                 </Button>
               </div>
@@ -189,8 +221,8 @@ const Index = () => {
                 />
               </div>
               <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="flex items-center space-x-4 hover:bg-gray-50 p-3 rounded-lg transition-colors">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors">
                     <Icon name="MapPin" size={24} className="text-primary" />
                   </div>
                   <div>
@@ -199,33 +231,33 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="flex items-center space-x-4 hover:bg-gray-50 p-3 rounded-lg transition-colors">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors">
                     <Icon name="MessageCircle" size={24} className="text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-secondary">Telegram</h3>
-                    <a href="#" className="text-primary hover:underline">@wse_am</a>
+                    <a href="#" className="text-primary hover:underline hover:scale-105 inline-block transition-transform">@wse_am</a>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="flex items-center space-x-4 hover:bg-gray-50 p-3 rounded-lg transition-colors">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors">
                     <Icon name="Instagram" size={24} className="text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-secondary">Instagram</h3>
-                    <a href="#" className="text-primary hover:underline">@wse.am</a>
+                    <a href="#" className="text-primary hover:underline hover:scale-105 inline-block transition-transform">@wse.am</a>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="flex items-center space-x-4 hover:bg-gray-50 p-3 rounded-lg transition-colors">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors">
                     <Icon name="Map" size={24} className="text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-secondary">Карты</h3>
-                    <a href="#" className="text-primary hover:underline">Найти нас на картах</a>
+                    <a href="#" className="text-primary hover:underline hover:scale-105 inline-block transition-transform">Найти нас на картах</a>
                   </div>
                 </div>
               </div>
@@ -242,13 +274,13 @@ const Index = () => {
             Агентство недвижимости в Ереване • Основано в 2023 году
           </p>
           <div className="flex justify-center space-x-6">
-            <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+            <a href="#" className="text-gray-300 hover:text-primary transition-all hover:scale-125">
               <Icon name="MessageCircle" size={24} />
             </a>
-            <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+            <a href="#" className="text-gray-300 hover:text-primary transition-all hover:scale-125">
               <Icon name="Instagram" size={24} />
             </a>
-            <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+            <a href="#" className="text-gray-300 hover:text-primary transition-all hover:scale-125">
               <Icon name="Map" size={24} />
             </a>
           </div>
